@@ -1,20 +1,63 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import TheHeader from '@/components/layout/TheHeader.vue'
+import TheFooter from '@/components/layout/TheFooter.vue'
+
+const router = useRouter()
+
+// 页面过渡动画钩子
+const beforeLeave = (el) => {
+  // 保存滚动位置
+  el._scrollPosition = window.scrollY
+}
+
+const enter = (el) => {
+  // 重置滚动位置
+  window.scrollTo(0, 0)
+}
+
+const afterEnter = (el) => {
+  // 如果存在锚点，滚动到锚点位置
+  const hash = router.currentRoute.value.hash
+  if (hash) {
+    const target = document.querySelector(hash)
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+}
+
+// 初始化时处理锚点导航
+onMounted(() => {
+  const hash = window.location.hash
+  if (hash) {
+    const target = document.querySelector(hash)
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
+  }
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="app">
+    <TheHeader />
+    <router-view v-slot="{ Component }">
+      <transition 
+        name="page" 
+        mode="out-in"
+        @before-leave="beforeLeave"
+        @enter="enter"
+        @after-enter="afterEnter"
+      >
+        <component :is="Component" />
+      </transition>
+    </router-view>
+    <TheFooter />
+  </div>
 </template>
 
 <style scoped>
@@ -43,5 +86,43 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 页面过渡动画 */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* 确保页面内容在过渡期间不会闪烁 */
+.page-enter-active {
+  position: absolute;
+  width: 100%;
+}
+
+.page-leave-active {
+  position: absolute;
+  width: 100%;
+}
+
+/* 防止页面过渡时的滚动条跳动 */
+html {
+  scrollbar-gutter: stable;
 }
 </style>

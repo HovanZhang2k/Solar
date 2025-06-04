@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@import './variables.css';
+@import './animations.css';
+
+/* 重置样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-secondary);
+  color: var(--dark-gray);
+  line-height: 1.7;
+  background-color: var(--pure-white);
+  overflow-x: hidden;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  color: var(--dark-blue);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* 链接样式 */
+a {
+  color: var(--brand-blue);
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+a:hover {
+  color: var(--bright-blue);
+}
+
+/* 按钮基础样式 */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--dark-blue);
+  color: var(--pure-white);
+  text-decoration: none;
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-full);
+  transition: var(--transition-normal);
+  border: none;
+  cursor: pointer;
+  font-size: var(--text-base);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--brand-blue);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--bright-blue);
+  color: var(--dark-gray);
+}
+
+.btn-secondary:hover {
+  background: var(--sky-blue);
+  color: var(--pure-white);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--dark-blue);
+  color: var(--dark-blue);
+}
+
+.btn-outline:hover {
+  background: var(--dark-blue);
+  color: var(--pure-white);
+}
+
+/* 容器样式 */
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* 通用间距类 */
+.section-padding {
+  padding: var(--spacing-4xl) 0;
+}
+
+.section-margin {
+  margin: var(--spacing-4xl) 0;
+}
+
+/* 响应式工具类 */
+@media (max-width: 1280px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: var(--container-md);
+  }
+  
+  .section-padding {
+    padding: var(--spacing-3xl) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+  
+  .section-padding {
+    padding: var(--spacing-2xl) 0;
+  }
+}
+
+/* 文本工具类 */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 弹性布局工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+/* 网格布局工具类 */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+} 
