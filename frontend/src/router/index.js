@@ -40,6 +40,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/projects/:id',
+      name: 'project-detail',
+      component: () => import('@/views/ProjectDetailView.vue'),
+      meta: {
+        title: 'Project Detail | Pan Pacific Energy Group'
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: NotFoundView,

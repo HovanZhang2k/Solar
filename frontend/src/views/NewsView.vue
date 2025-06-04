@@ -3,13 +3,6 @@
     <div class="container">
       <h1 class="page-title">Latest News</h1>
       
-      <!-- 新闻搜索组件 -->
-      <NewsSearch
-        @search="handleSearch"
-        @category-change="handleCategoryChange"
-        @time-range-change="handleTimeRangeChange"
-      />
-      
       <!-- 新闻列表 -->
       <div class="news-grid">
         <div v-if="loading" class="loading-state">
@@ -52,7 +45,6 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import NewsSearch from '@/components/NewsSearch.vue'
 import { formatDate } from '@/utils/date'
 
 // 状态
@@ -95,51 +87,8 @@ const news = ref([
   }
 ])
 
-// 处理搜索
-const handleSearch = (query) => {
-  searchQuery.value = query
-}
-
-// 处理分类变化
-const handleCategoryChange = (category) => {
-  selectedCategory.value = category
-}
-
-// 处理时间范围变化
-const handleTimeRangeChange = (range) => {
-  timeRange.value = range
-}
-
-// 过滤新闻
-const filteredNews = computed(() => {
-  return news.value.filter(item => {
-    const matchesSearch = item.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-                         item.summary.toLowerCase().includes(searchQuery.value.toLowerCase())
-    const matchesCategory = selectedCategory.value === 'all' || item.category === selectedCategory.value
-    const matchesTimeRange = timeRange.value === 'all' || isWithinTimeRange(item.date, timeRange.value)
-    
-    return matchesSearch && matchesCategory && matchesTimeRange
-  })
-})
-
-// 检查日期是否在时间范围内
-const isWithinTimeRange = (date, range) => {
-  const newsDate = new Date(date)
-  const now = new Date()
-  const diffTime = Math.abs(now - newsDate)
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-  
-  switch (range) {
-    case 'week':
-      return diffDays <= 7
-    case 'month':
-      return diffDays <= 30
-    case 'year':
-      return diffDays <= 365
-    default:
-      return true
-  }
-}
+// 过滤新闻（只保留全部，不再用搜索和筛选）
+const filteredNews = computed(() => news.value)
 </script>
 
 <style scoped>
@@ -147,10 +96,16 @@ const isWithinTimeRange = (date, range) => {
   padding: 40px 0;
 }
 
+.container {
+  padding-top: 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .page-title {
   font-size: 2.5rem;
   color: var(--dark-blue);
-  margin-bottom: 40px;
+  margin-bottom: 3rem;
   text-align: center;
 }
 

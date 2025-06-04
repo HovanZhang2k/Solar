@@ -6,13 +6,27 @@
     <!-- 主要内容区域 -->
     <main>
       <!-- 各个区块组件将在这里引入 -->
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <ProjectsSection />
-      <InvestmentSection />
-      <TestimonialsSection />
-      <NewsSection />
+      <section id="home">
+        <HeroSection />
+      </section>
+      <section id="about">
+        <AboutSection />
+      </section>
+      <section id="services">
+        <ServicesSection />
+      </section>
+      <section id="projects">
+        <ProjectsSection />
+      </section>
+      <section id="funding">
+        <InvestmentSection />
+      </section>
+      <section id="testimonials">
+        <TestimonialsSection />
+      </section>
+      <section id="news">
+        <NewsSection />
+      </section>
     </main>
 
     <!-- 页脚组件将在这里引入 -->

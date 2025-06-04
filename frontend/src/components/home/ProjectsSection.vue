@@ -13,7 +13,7 @@
              :style="{ animationDelay: `${index * 100}ms` }">
           <div class="project-image" :style="{ backgroundImage: `url(${project.image})` }">
             <div class="project-overlay">
-              <router-link :to="project.link" class="view-project">
+              <router-link :to="`/projects/${project.id}`" class="view-project">
                 View Details <i class="fas fa-arrow-right"></i>
               </router-link>
             </div>
@@ -47,11 +47,11 @@
 <script setup>
 const projects = [
   {
+    id: '1',
     title: 'Elements of Byron Bay',
     location: 'Byron Bay, NSW',
     description: 'Large-scale resort solar installation with integrated battery storage solution',
     image: '@/assets/images/logo.png',
-    link: '/projects#byron-bay',
     stats: [
       { value: '1 MW', label: 'Solar PV' },
       { value: '1 MWh', label: 'Storage' },
@@ -59,22 +59,22 @@ const projects = [
     ]
   },
   {
+    id: '2',
     title: 'Narre Warren Facility',
     location: 'Narre Warren, Victoria',
     description: 'Commercial solar and battery storage solution for manufacturing facility',
     image: '@/assets/images/logo.png',
-    link: '/projects#narre-warren',
     stats: [
       { value: '99 kW', label: 'Solar PV' },
       { value: '215 kWh', label: 'Storage' }
     ]
   },
   {
+    id: '3',
     title: 'Upper Mount Gravatt',
     location: 'Upper Mount Gravatt, QLD',
     description: 'Commercial solar power system for retail and office complex',
     image: '@/assets/images/logo.png',
-    link: '/projects#mount-gravatt',
     stats: [
       { value: '90 kW', label: 'Solar PV' },
       { value: 'Lightweight', label: 'Panel Type' }
